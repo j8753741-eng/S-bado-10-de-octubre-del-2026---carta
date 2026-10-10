@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#08070d">
+<title>Donde mis sueños ya tienen tu nombre</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&family=Parisienne&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --gold: #e8c77b;
+  --gold-light: #fff0bd;
+  --purple: #c77dff;
+  --purple-light: #edc7ff;
+  --background: #08070d;
+  --panel: rgba(20, 16, 25, .91);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--background);
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  color: #f7eddd;
+  font-family: 'Montserrat', sans-serif;
+  background:
+    radial-gradient(ellipse at 50% 5%, rgba(103, 65, 112, .20), transparent 40%),
+    radial-gradient(ellipse at 10% 45%, rgba(182, 133, 60, .07), transparent 36%),
+    linear-gradient(180deg, #08070d 0%, #100c16 48%, #07070b 100%);
+  line-height: 1.95;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: .22;
+  background-image:
+    radial-gradient(1px 1px at 12% 15%, #fff0bd 99%, transparent),
+    radial-gradient(1px 1px at 82% 22%, #fff 99%, transparent),
+    radial-gradient(2px 2px at 73% 68%, #d9a6ff 99%, transparent),
+    radial-gradient(1px 1px at 23% 77%, #e8c77b 99%, transparent),
+    radial-gradient(1px 1px at 91% 88%, #fff 99%, transparent);
+  background-size: 190px 190px, 230px 230px, 280px 280px, 210px 210px, 260px 260px;
+}
+
+.water {
+  position: fixed;
+  left: -10%;
+  right: -10%;
+  bottom: -35px;
+  height: 28vh;
+  z-index: 0;
+  pointer-events: none;
+  opacity: .3;
+  background:
+    repeating-linear-gradient(
+      176deg,
+      transparent 0px,
+      transparent 8px,
+      rgba(232, 199, 123, .09) 9px,
+      transparent 11px,
+      transparent 19px
+    );
+  filter: blur(1.5px);
+  mask-image: linear-gradient(to bottom, transparent, black 38%, transparent);
+  animation: waterMove 10s ease-in-out infinite alternate;
+}
+
+@keyframes waterMove {
+  from { transform: translateX(-12px) scaleY(.9); }
+  to { transform: translateX(12px) scaleY(1.08); }
+}
+
+main {
+  width: min(820px, 100%);
+  margin: auto;
+  padding: 25px 17px 45px;
+  position: relative;
+  z-index: 1;
+}
+
+.top-ornament {
+  text-align: center;
+  color: var(--gold);
+  font-size: 22px;
+  letter-spacing: 13px;
+  padding: 13px 0 20px 13px;
+  text-shadow: 0 0 18px rgba(232, 199, 123, .6);
+}
+
+.cover {
+  position: relative;
+  padding: 10px;
+  border: 1px solid rgba(232, 199, 123, .7);
+  border-radius: 20px 20px 65px 20px;
+  background: linear-gradient(145deg, rgba(232,199,123,.13), rgba(20,13,28,.5), rgba(199,125,255,.08));
+  box-shadow:
+    0 0 25px rgba(232,199,123,.09),
+    inset 0 0 25px rgba(199,125,255,.04);
+}
+
+.cover::before {
+  content: "✧  ♡  ✧";
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0 15px;
+  background: #100c16;
+  color: var(--gold-light);
+  font-size: 17px;
+  letter-spacing: 7px;
+  white-space: nowrap;
+  z-index: 2;
+}
+
+.photo-frame {
+  width: 100%;
+  height: clamp(230px, 64vw, 460px);
+  overflow: hidden;
+  border-radius: 13px 13px 52px 13px;
+  position: relative;
+  background:
+    radial-gradient(ellipse at 50% 35%, rgba(199,125,255,.18), transparent 55%),
+    linear-gradient(135deg, #17111d, #07070b);
+  border: 1px solid rgba(255,240,189,.2);
+  cursor: zoom-in;
+  touch-action: manipulation;
+}
+
+.photo-frame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  color: #e8c77b;
+  text-align: center;
+  font-size: 13px;
+}
+
+.photo-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 12px;
+  pointer-events: none;
+  color: var(--gold);
+  text-align: center;
+  padding: 20px;
+}
+
+.photo-placeholder .cat {
+  font-size: 62px;
+  filter: drop-shadow(0 0 18px rgba(232,199,123,.5));
+}
+
+.photo-placeholder small {
+  color: #d4c5db;
+  font-size: 10px;
+  letter-spacing: 2px;
+}
+
+.photo-frame.has-image .photo-placeholder {
+  display: none;
+}
+
+.photo-hint {
+  text-align: center;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: #c9b4d6;
+  padding: 11px 0 3px;
+}
+
+.header {
+  text-align: center;
+  padding: 40px 5px 27px;
+}
+
+.eyebrow {
+  font-size: 10px;
+  color: var(--gold);
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  margin-bottom: 17px;
+}
+
+h1 {
+  font-family: 'Cinzel', serif;
+  font-weight: 500;
+  color: var(--gold-light);
+  font-size: clamp(25px, 5.8vw, 43px);
+  line-height: 1.45;
+  text-shadow:
+    0 0 12px rgba(232,199,123,.2),
+    0 0 30px rgba(232,199,123,.1);
+}
+
+.date {
+  margin-top: 18px;
+  font-size: 11px;
+  color: #cdb6d7;
+  letter-spacing: 3px;
+}
+
+.header-paws {
+  font-size: 23px;
+  margin-top: 20px;
+  letter-spacing: 8px;
+  color: var(--gold);
+}
+
+.letter {
+  position: relative;
+  border: 1px solid rgba(232,199,123,.3);
+  border-radius: 23px 5px 23px 5px;
+  padding: clamp(23px, 6vw, 47px);
+  background:
+    linear-gradient(140deg, rgba(35,24,37,.78), rgba(12,10,17,.94) 55%, rgba(24,17,28,.87));
+  box-shadow:
+    0 20px 65px rgba(0,0,0,.36),
+    inset 0 0 35px rgba(232,199,123,.025);
+}
+
+.letter::before,
+.letter::after {
+  position: absolute;
+  color: rgba(232,199,123,.65);
+  font-size: 22px;
+  line-height: 1;
+}
+
+.letter::before {
+  content: "✧";
+  top: 12px;
+  left: 14px;
+}
+
+.letter::after {
+  content: "✧";
+  right: 14px;
+  bottom: 12px;
+}
+
+.letter p {
+  font-size: clamp(14px, 3.5vw, 15.5px);
+  line-height: 2.05;
+  margin-bottom: 23px;
+  color: #f0e5dc;
+  font-weight: 300;
+  overflow-wrap: anywhere;
+}
+
+.letter p:last-child {
+  margin-bottom: 0;
+}
+
+.letter .nickname {
+  font-family: 'Parisienne', cursive;
+  font-size: clamp(25px, 6vw, 34px);
+  color: var(--gold-light);
+  line-height: 1.6;
+  text-shadow: 0 0 18px rgba(232,199,123,.18);
+  margin-bottom: 25px;
+}
+
+.letter strong {
+  font-weight: 600;
+  color: var(--gold-light);
+}
+
+.signature {
+  text-align: center;
+  margin-top: 36px;
+  padding: 28px 13px;
+  border-top: 1px solid rgba(232,199,123,.3);
+  border-bottom: 1px solid rgba(232,199,123,.3);
+  background: linear-gradient(90deg, transparent, rgba(232,199,123,.035), transparent);
+}
+
+.signature .intro {
+  color: #d7c5d6;
+  font-size: 12px;
+  margin-bottom: 23px;
+}
+
+.signature p {
+  margin: 13px 0;
+  font-family: 'Cinzel', serif;
+  font-size: clamp(11px, 3vw, 15px);
+  line-height: 1.9;
+  overflow-wrap: anywhere;
+}
+
+.signature strong {
+  color: var(--gold-light);
+  font-weight: 600;
+  text-shadow: 0 0 13px rgba(232,199,123,.13);
+}
+
+.declaration {
+  text-align: center;
+  margin: 43px 0 30px;
+  padding: 29px 15px;
+  border: 1px solid rgba(199,125,255,.25);
+  border-radius: 24px 5px 24px 5px;
+  background: radial-gradient(ellipse at center, rgba(119,49,161,.12), transparent 75%);
+}
+
+.declaration .moon {
+  font-size: 27px;
+  margin-bottom: 14px;
+  filter: drop-shadow(0 0 13px rgba(199,125,255,.8));
+}
+
+.neon {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(16px, 4vw, 22px);
+  line-height: 1.85;
+  color: var(--purple-light);
+  text-shadow:
+    0 0 5px #c77dff,
+    0 0 12px #b75cff,
+    0 0 28px rgba(176,75,255,.75);
+  animation: neonPulse 3s ease-in-out infinite alternate;
+}
+
+@keyframes neonPulse {
+  from {
+    text-shadow: 0 0 5px #c77dff, 0 0 12px #b75cff, 0 0 22px rgba(176,75,255,.45);
+  }
+  to {
+    text-shadow: 0 0 7px #edc7ff, 0 0 17px #b75cff, 0 0 35px rgba(176,75,255,.85);
+  }
+}
+
+.declaration .noah {
+  margin-top: 17px;
+  color: #dfc7ee;
+  font-size: 13px;
+  line-height: 2;
+  font-style: italic;
+}
+
+.declaration .forever {
+  margin-top: 22px;
+  font-family: 'Parisienne', cursive;
+  font-size: clamp(28px, 7vw, 39px);
+  color: #f2d9ff;
+  text-shadow: 0 0 8px #c77dff, 0 0 22px rgba(199,125,255,.9);
+}
+
+.cat-divider {
+  text-align: center;
+  margin: 24px 0;
+  color: var(--gold);
+  letter-spacing: 10px;
+  font-size: 17px;
+  opacity: .8;
+}
+
+.poem-area {
+  text-align: center;
+  padding: 15px 0 5px;
+}
+
+.poem-area .caption {
+  color: #cbbbd1;
+  font-size: 11px;
+  letter-spacing: 2px;
+  line-height: 1.9;
+  margin-bottom: 20px;
+}
+
+.poem-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  max-width: 100%;
+  padding: 15px 23px;
+  border: 1px solid var(--gold);
+  border-radius: 50px;
+  background: linear-gradient(110deg, #261b2b, #17101e, #2b1c28);
+  color: var(--gold-light);
+  text-decoration: none;
+  font-family: 'Cinzel', serif;
+  font-size: 12px;
+  letter-spacing: 1px;
+  box-shadow: 0 0 20px rgba(232,199,123,.1);
+  transition: transform .25s, box-shadow .25s, background .25s;
+}
+
+.poem-button:hover,
+.poem-button:focus-visible {
+  transform: translateY(-3px);
+  box-shadow: 0 0 27px rgba(232,199,123,.28);
+  background: #302036;
+  outline: none;
+}
+
+.footer {
+  text-align: center;
+  color: #9f8ca9;
+  font-size: 10px;
+  letter-spacing: 2px;
+  padding: 37px 0 10px;
+}
+
+.footer .paw {
+  display: block;
+  color: var(--gold);
+  font-size: 23px;
+  margin-bottom: 9px;
+}
+
+/* Visor de imagen a pantalla completa */
+.viewer {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 76px 12px 18px;
+  background: rgba(3,2,7,.97);
+  backdrop-filter: blur(12px);
+}
+
+.viewer.open {
+  display: flex;
+}
+
+.viewer img {
+  display: block;
+  max-width: 100%;
+  max-height: calc(100dvh - 105px);
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 0 35px rgba(232,199,123,.12);
+  touch-action: pan-y pinch-zoom;
+}
+
+.back-button {
+  position: absolute;
+  z-index: 2;
+  top: max(15px, env(safe-area-inset-top));
+  left: 50%;
+  transform: translateX(-50%);
+  border: 1px solid var(--gold);
+  border-radius: 30px;
+  background: linear-gradient(135deg, #25172d, #100c16);
+  color: var(--gold-light);
+  padding: 13px 21px;
+  min-height: 46px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow: 0 0 20px rgba(232,199,123,.15);
+}
+
+.back-button:active {
+  transform: translateX(-50%) scale(.97);
+}
+
+.viewer-help {
+  position: absolute;
+  bottom: max(12px, env(safe-area-inset-bottom));
+  left: 0;
+  right: 0;
+  text-align: center;
+  color: #b9a8c4;
+  font-size: 10px;
+  letter-spacing: 1px;
+  pointer-events: none;
+}
+
+@media (max-width: 480px) {
+  main { padding: 16px 12px 32px; }
+  .letter { padding: 27px 21px; }
+  .letter p { line-height: 1.95; }
+  .cover { padding: 7px; }
+  .poem-button { padding: 14px 17px; font-size: 11px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+}
+</style>
+</head>
+
+<body>
+<div class="water" aria-hidden="true"></div>
+
+<main>
+  <div class="top-ornament" aria-hidden="true">✧ ♡ 🐾 ♡ ✧</div>
+
+  <!-- RECUADRO PARA LA FOTOGRAFÍA
+       Cambia "TU-IMAGEN.jpg" por el nombre exacto de tu imagen.
+       Si la subes al mismo repositorio, puedes escribir, por ejemplo:
+       src="foto-sabado.png"
+  -->
+  <section class="cover" aria-label="Fotografía de nuestro amor">
+    <div class="photo-frame" id="photoFrame" role="button"
+         tabindex="0" aria-label="Toca dos veces para ampliar la fotografía">
+      <img id="letterPhoto" src="IMG_20261009_213616.png"
+           alt="Un recuerdo especial de nuestro amor"
+           onload="this.parentElement.classList.add('has-image')"
+           onerror="this.style.display='none'">
+      <div class="photo-placeholder">
+        <span class="cat">🐈‍⬛</span>
+        <span>UN LUGAR GUARDADO PARA NOSOTROS</span>
+        <small>AMOR · TERNURA · ETERNIDAD</small>
+      </div>
+    </div>
+    <div class="photo-hint">♡ TOCA DOS VECES LA FOTOGRAFÍA PARA VERLA EN GRANDE ♡</div>
+  </section>
+
+  <header class="header">
+    <div class="eyebrow">Una mañana escrita para ti · Carta X</div>
+    <h1>✦ DONDE MIS SUEÑOS YA TIENEN TU NOMBRE ✦</h1>
+    <div class="date">SÁBADO, 10 DE OCTUBRE DE 2026</div>
+    <div class="header-paws" aria-hidden="true">🐾　✧　🐾</div>
+  </header>
+
+  <article class="letter">
+    <p class="nickname">Mi Preciosa Eternidad de Mis Deseos, ❤️‍🔥🐈</p>
+
+    <p>Buenos días, mi vida hermosa. ❤️‍🔥💗 Esta es nuestra décima cartita de octubre, y aquí te dejo un pedacito de mi corazón para que te acompañe desde el instante en que abras tus ojitos, hasta el último suspiro de este día. Quisiera que cada palabra te abrace como lo harían mis brazos si pudiera tenerte cerquita ahora mismo.</p>
+
+    <p>Mi niña linda, cada vez falta menos para volver a verte, y no sabes cuánto me duele que estos días se sientan tan tristes sin ti. No sé si es mi corazón extrañándote demasiado, pero mi vida pierde sus colores cuando no estás a mi lado. Eres esa personita con quien siempre quiero hablar, mi pensamiento más bonito y el lugar al que quisiera regresar una y mil veces. No te miento cuando digo que quisiera estar contigo a cada ratito, compartir mis días contigo y, algún día, despertar a tu ladito sabiendo que ya no tengo que despedirme de ti para volver a casa. 🥹❤️‍🔥</p>
+
+    <p>Y, mi amor, lo he pensado, lo he soñado y lo he imaginado tantas veces: quiero un futuro contigo, tomarte de la manito y protegerte con todo el amor que llevo dentro. Sueño con el día en que alcances tus metas y yo pueda aparecer a tu lado con un hermoso ramo de flores, abrazarte, llenarte de besitos y decirte: «Mi niña preciosa, este es apenas el primero de los muchísimos sueños que vas a cumplir, y quiero estar aquí para celebrar cada uno de ellos contigo». Porque tus alegrías también hacen latir mi corazón, y verte brillar será siempre uno de mis mayores regalos. 💐💍❤️</p>
+
+    <p>Te amo más de lo que mis palabras alcanzan a explicar, mi preciosa eternidad. Y cuando por fin vuelva a mirarte a los ojitos, espero que sientas en cada abrazo todos estos días que he pasado deseando tenerte cerquita.</p>
+
+    <p>Faltan 2 días y 3 noches para volver a verte, mi cielo. Y mientras llega ese instante, quiero que recuerdes que hay un muchachito que sueña contigo, que te elige incluso en la distancia y que guarda un futuro entero en su corazón, con la ilusión de compartirlo contigo. Te amo con locura, mi niña hermosa. Hoy, mañana y en cada uno de los días que todavía nos quedan por vivir. ❤️‍🔥💋🐈</p>
+
+    <p>Con todo mi amor, para la dueña de mis sueños y de mi porvenir,</p>
+
+    <div class="signature">
+      <p><strong>JUAN KALETH MENDOZA PRIMERA • TU AMOR</strong></p>
+      <p><strong>VALERIA PETRO VILLAZÓN • MI FUTURO MÁS BONITO ❤️‍🔥💗</strong></p>
+    </div>
+  </article>
+
+  <div class="cat-divider" aria-hidden="true">🐾　✧　♡　✧　🐾</div>
+
+  <!-- DECLARACIÓN FINAL EN FRANCÉS Y NEÓN MORADO -->
+  <section class="declaration">
+    <div class="moon" aria-hidden="true">🌙 🐈‍⬛ 💜</div>
+
+    <p class="neon">
+      Valeria, mon âme brûle d’amour pour toi.
+    </p>
+
+    <p class="noah">
+      Que notre petit Noah veille sur nous depuis le ciel
+      et nous accompagne partout où la vie nous mène.
+    </p>
+
+    <p class="forever">Je t’aime, Valeria Petro Villazón. Pour toujours. ❤️‍🔥</p>
+  </section>
+
+  <div class="cat-divider" aria-hidden="true">✧ 🐈 ✧</div>
+
+  <!-- BOTÓN DEL POEMA: COLOCA AQUÍ EL ENLACE CORRESPONDIENTE -->
+  <section class="poem-area">
+    <p class="caption">
+      UN PEDACITO MÁS DE MI CORAZÓN TE ESPERA AQUÍ<br>
+      Cuando quieras, abre también el poema de este día.
+    </p>
+
+    <a class="poem-button" id="poemLink" href="#"
+       onclick="if(this.getAttribute('href')==='#'){alert('Añade el enlace de tu poema en el código HTML.'); return false;}">
+      <span>🐾</span>
+      <span>ABRIR EL POEMA DE HOY</span>
+      <span>♡</span>
+    </a>
+  </section>
+
+  <footer class="footer">
+    <span class="paw">🐾</span>
+    ESCRITO CON AMOR, PARA TI Y SOLAMENTE PARA TI
+    <br>
+    <span style="display:block;margin-top:8px;color:#75617f">
+      DOS CORAZONES · UN SUEÑO · NUESTRO NOAH EN EL CIELO
+    </span>
+  </footer>
+</main>
+
+<!-- VISOR INDEPENDIENTE PARA AMPLIAR LA FOTO -->
+<div class="viewer" id="imageViewer"
+     role="dialog" aria-modal="true"
+     aria-label="Fotografía ampliada">
+  <button class="back-button" id="backButton" type="button">
+    ← Volver a la carta
+  </button>
+  <img id="expandedPhoto" src="IMG_20261009_213616.png" alt="Fotografía ampliada">
+  <div class="viewer-help">PULSA «VOLVER A LA CARTA» O LA TECLA ESC</div>
+</div>
+
+<script>
+(function () {
+  const frame = document.getElementById('photoFrame');
+  const photo = document.getElementById('letterPhoto');
+  const viewer = document.getElementById('imageViewer');
+  const expandedPhoto = document.getElementById('expandedPhoto');
+  const backButton = document.getElementById('backButton');
+
+  let lastTap = 0;
+  let lastTouchTime = 0;
+  let previousOverflow = '';
+
+  function openViewer() {
+    if (!photo.src || photo.style.display === 'none' ||
+        !photo.complete || photo.naturalWidth === 0) {
+      return;
+    }
+
+    expandedPhoto.src = photo.src;
+    expandedPhoto.alt = photo.alt;
+    previousOverflow = document.body.style.overflow;
+    viewer.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    backButton.focus({ preventScroll: true });
+  }
+
+  function closeViewer() {
+    viewer.classList.remove('open');
+    document.body.style.overflow = previousOverflow;
+    expandedPhoto.src = 'IMG_20261009_213616.png';
+    frame.focus({ preventScroll: true });
+  }
+
+  // En computador: doble clic para ampliar.
+  frame.addEventListener('dblclick', function (event) {
+    event.preventDefault();
+    openViewer();
+  });
+
+  // En celular: doble toque, evitando el doble disparo del navegador.
+  frame.addEventListener('touchend', function (event) {
+    const now = Date.now();
+
+    if (now - lastTouchTime < 350) {
+      event.preventDefault();
+      lastTouchTime = 0;
+      openViewer();
+    } else {
+      lastTouchTime = now;
+    }
+  }, { passive: false });
+
+  // Alternativa accesible para teclado.
+  frame.addEventListener('keydown', function (event) {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      const now = Date.now();
+
+      if (now - lastTap < 450) {
+        openViewer();
+        lastTap = 0;
+      } else {
+        lastTap = now;
+      }
+    }
+  });
+
+  backButton.addEventListener('click', closeViewer);
+
+  // Tocar el fondo cierra el visor; tocar la foto no lo cierra.
+  viewer.addEventListener('click', function (event) {
+    if (event.target === viewer) closeViewer();
+  });
+
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape' && viewer.classList.contains('open')) {
+      closeViewer();
+    }
+  });
+})();
+</script>
+</body>
+</html>
